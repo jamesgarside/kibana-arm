@@ -6,15 +6,15 @@ Feel free to branch and update yourselves.
 
 
 ## Docker Images
-Pre-built docker images can be found on my Dockerhub [here](https://hub.docker.com/r/jamesgarside/kibana/)
+Pre-built docker images can be found on my Dockerhub [here](https://hub.docker.com/r/jamesgarside/kibana/).
 
-[7.9.1](https://hub.docker.com/r/jamesgarside/kibana/tags)
+[Kibana 7.9.3](https://hub.docker.com/r/jamesgarside/kibana/tags)
 
 
 ## TODO
 - [x] Create based Dockerfile
-- [] Package Kibana for Debian/Ubuntu Systems
-- [] Package Kibana for CentOS/RHEL Systems
+- [ ] Package Kibana for Debian/Ubuntu Systems
+- [ ] Package Kibana for CentOS/RHEL Systems
 
 
 ## Disclaimer

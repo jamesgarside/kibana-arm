@@ -18,7 +18,7 @@ Pre-built docker images can be found on my Dockerhub [here](https://hub.docker.c
 
 
 ## Disclaimer
-I've not fully tests these builds and as they are not 'supported' I cannot gaurentee there won’t be issues, however in my testing I'm yet to come across any. 
+I've not fully tested these builds and as they are not 'supported' by Elastic I cannot gaurentee there won’t be issues, however in my testing I'm yet to come across any. 
 
 ## Credit
 This blog post assisted with the development of this repo - https://toddysm.com/2020/06/09/learn-more-about-your-home-network-with-elastic-siem-part-1-setting-up-elastic-siem/

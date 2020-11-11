@@ -22,6 +22,6 @@ RUN ln -s /usr/share/kibana/node/bin/npm /usr/bin/npm
 RUN ln -s /usr/share/kibana/node/bin/npx /usr/bin/npx
 
 EXPOSE 5601
-COPY kibana.yml /usr/share/kibana/config/kibana.yml/
+COPY kibana.yml /usr/share/kibana/config/
 
 CMD ["/usr/share/kibana/bin/kibana","--allow-root", "-c", "/usr/share/kibana/config/kibana.yml"]

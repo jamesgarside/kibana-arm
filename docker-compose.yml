@@ -21,10 +21,8 @@ services:
         - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       volumes:
         - data01:/usr/share/elasticsearch/data
-
       networks:
         - elastic
-
 volumes:
   data01:
 networks:

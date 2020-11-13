@@ -13,9 +13,15 @@ Pre-built docker images can be found on my Dockerhub [here](https://hub.docker.c
 
 - [Kibana 7.9.3](https://hub.docker.com/r/jamesgarside/kibana/tags)
 
+## Usage
+A basic `Docker-coompose.yml` file has been included with is repo to allow for basic testing. It will create one Elasticsearch instance and one Kibana instance
+
+### Elastic Stack
+I have an Elastic Stack for Arm Repo which can be [found here](https://github.com/jamesgarside/elastic-stack-arm).
+This repo will deploy a full 3 node Elasticsearch Cluster with Crypt (TLS) along with a single Kibana Instance by running one script. 
 
 ## TODO
-- [x] Create based Dockerfile
+- [x] Create basic Dockerfile
 - [ ] Package Kibana for Debian/Ubuntu Systems
 - [ ] Package Kibana for CentOS/RHEL Systems
 

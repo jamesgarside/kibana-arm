@@ -11,6 +11,7 @@ This a modified version of the Official Dockerfile found [here](https://github.c
 ## Docker Images
 Pre-built docker images can be found on my Dockerhub [here](https://hub.docker.com/r/jamesgarside/kibana/).
 
+- [Kibana 7.10.0](https://hub.docker.com/r/jamesgarside/kibana/tags)
 - [Kibana 7.9.3](https://hub.docker.com/r/jamesgarside/kibana/tags)
 
 ## Usage

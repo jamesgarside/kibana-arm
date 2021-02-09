@@ -31,8 +31,8 @@ RUN rm -rf /usr/share/kibana/node
 RUN mkdir /usr/share/kibana/node
 
 # Download & Extract compatiable Node version
-RUN curl -L -O https://nodejs.org/download/release/v10.22.1/node-v10.22.1-linux-arm64.tar.xz
-RUN tar -xJvf node-v10.22.1-linux-arm64.tar.xz
+RUN curl -L -O https://nodejs.org/download/release/v10.23.1/node-v10.23.1-linux-arm64.tar.xz
+RUN tar -xJvf node-v10.23.1-linux-arm64.tar.xz
 
 # Move new Node version to Kibana directory
 RUN mv ./node-v10.*/* /usr/share/kibana/node
@@ -108,7 +108,7 @@ LABEL org.label-schema.build-date="2020-11-09T22:36:43.117Z" \
   org.label-schema.vcs-ref="1796b5ec8fa1e60ccea63f2e5c25ccc665b92fdc" \
   org.label-schema.vcs-url="https://github.com/elastic/kibana" \
   org.label-schema.vendor="Elastic" \
-  org.label-schema.version="7.10.0" \
+  org.label-schema.version="7.10.2" \
   org.opencontainers.image.created="2020-11-09T22:36:43.117Z" \
   org.opencontainers.image.documentation="https://www.elastic.co/guide/en/kibana/reference/index.html" \
   org.opencontainers.image.licenses="Elastic License" \
@@ -117,7 +117,7 @@ LABEL org.label-schema.build-date="2020-11-09T22:36:43.117Z" \
   org.opencontainers.image.title="Kibana" \
   org.opencontainers.image.url="https://www.elastic.co/products/kibana" \
   org.opencontainers.image.vendor="Elastic" \
-  org.opencontainers.image.version="7.10.0"
+  org.opencontainers.image.version="7.10.2"
 
 
 USER kibana

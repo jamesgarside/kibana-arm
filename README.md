@@ -7,10 +7,12 @@ Feel free to branch and update yourselves.
 ## Docker Description
 This a modified version of the Official Dockerfile found [here](https://github.com/elastic/dockerfiles/blob/7.9/kibana/Dockerfile)
 
+Since 7.11.0 the Node re2 module needs recompiling as the shipped version is compiled for x86. This is handled a the container time of creation.
 
 ## Docker Images
 Pre-built docker images can be found on my Dockerhub [here](https://hub.docker.com/r/jamesgarside/kibana/).
 
+- [Kibana 7.11.0](https://hub.docker.com/r/jamesgarside/kibana/tags)
 - [Kibana 7.10.2](https://hub.docker.com/r/jamesgarside/kibana/tags)
 - [Kibana 7.10.0](https://hub.docker.com/r/jamesgarside/kibana/tags)
 - [Kibana 7.9.3](https://hub.docker.com/r/jamesgarside/kibana/tags)

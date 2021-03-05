@@ -12,6 +12,7 @@ Since 7.11.0 the Node re2 module needs recompiling as the shipped version is com
 ## Docker Images
 Pre-built docker images can be found on my Dockerhub [here](https://hub.docker.com/r/jamesgarside/kibana/).
 
+- [Kibana 7.11.1](https://hub.docker.com/r/jamesgarside/kibana/tags)
 - [Kibana 7.11.0](https://hub.docker.com/r/jamesgarside/kibana/tags)
 - [Kibana 7.10.2](https://hub.docker.com/r/jamesgarside/kibana/tags)
 - [Kibana 7.10.0](https://hub.docker.com/r/jamesgarside/kibana/tags)

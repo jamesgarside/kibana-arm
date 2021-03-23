@@ -9,17 +9,17 @@
 # Build stage 0 `builder`:
 # Extract Kibana artifact
 ################################################################################
-FROM centos:8 AS builder
+FROM arm64v8/centos:8 AS builder
 
 
 RUN cd /opt && \
-  curl --retry 8 -s -L -O https://artifacts.elastic.co/downloads/kibana/kibana-7.11.1-linux-x86_64.tar.gz && \
+  curl --retry 8 -s -L -O https://artifacts.elastic.co/downloads/kibana/kibana-7.11.2-linux-x86_64.tar.gz && \
   cd -
 
 
 RUN mkdir /usr/share/kibana
 WORKDIR /usr/share/kibana
-RUN tar --strip-components=1 -zxf /opt/kibana-7.11.1-linux-x86_64.tar.gz
+RUN tar --strip-components=1 -zxf /opt/kibana-7.11.2-linux-x86_64.tar.gz
 # Ensure that group permissions are the same as user permissions.
 # This will help when relying on GID-0 to run Kibana, rather than UID-1000.
 # OpenShift does this, for example.
@@ -59,7 +59,7 @@ RUN chmod -R g=u /usr/share/kibana
 # Copy kibana from stage 
 # Add entrypoint
 ################################################################################
-FROM centos:8
+FROM arm64v8/centos:8
 EXPOSE 5601
 
 

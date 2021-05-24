@@ -9,64 +9,39 @@
 # Build stage 0 `builder`:
 # Extract Kibana artifact
 ################################################################################
-FROM arm64v8/centos:8 AS builder
+FROM centos:8 AS builder
 
 
 RUN cd /opt && \
-  curl --retry 8 -s -L -O https://artifacts.elastic.co/downloads/kibana/kibana-7.11.2-linux-x86_64.tar.gz && \
+  curl --retry 8 -s -L \
+    --output kibana.tar.gz \
+     https://artifacts.elastic.co/downloads/kibana/kibana-7.12.0-linux-$(arch).tar.gz && \
   cd -
 
 
 RUN mkdir /usr/share/kibana
 WORKDIR /usr/share/kibana
-RUN tar --strip-components=1 -zxf /opt/kibana-7.11.2-linux-x86_64.tar.gz
+RUN tar --strip-components=1 -zxf /opt/kibana.tar.gz
 # Ensure that group permissions are the same as user permissions.
 # This will help when relying on GID-0 to run Kibana, rather than UID-1000.
 # OpenShift does this, for example.
 # REF: https://docs.openshift.org/latest/creating_images/guidelines.html
-
-
-
-##########################################
-# Remove packaged Node version
-RUN rm -rf /usr/share/kibana/node
-RUN mkdir /usr/share/kibana/node
-
-# Download & Extract compatiable Node version
-RUN curl -L -O https://nodejs.org/download/release/v14.15.4/node-v14.15.4-linux-arm64.tar.xz
-RUN tar -xJvf node-v14.15.4-linux-arm64.tar.xz
-
-# Move new Node version to Kibana directory
-RUN mv ./node-v14.*/* /usr/share/kibana/node
-RUN rm -rf node-v14.*
-###########################################
-
-# Recompile re2 node module for ARM64
-WORKDIR /root
-ENV PATH="/usr/share/kibana/node/bin:$PATH"
-RUN yum install -y gcc-c++ make python2
-RUN cd /root/ 
-RUN npm install re2
-RUN mv -f node_modules/re2/build/Release/re2.node /usr/share/kibana/node_modules/re2/build/Release/re2.node
-###########################################
-
-
 RUN chmod -R g=u /usr/share/kibana
 
 ################################################################################
 # Build stage 1 (the actual Kibana image):
 #
-# Copy kibana from stage 
+# Copy kibana from stage 0
 # Add entrypoint
 ################################################################################
-FROM arm64v8/centos:8
+FROM centos:8
 EXPOSE 5601
 
 
 RUN for iter in {1..10}; do \
       yum update --setopt=tsflags=nodocs -y && \
       yum install --setopt=tsflags=nodocs -y \
-        fontconfig freetype shadow-utils nss && \
+        fontconfig freetype shadow-utils nss  && \
       yum clean all && exit_code=0 && break || exit_code=$? && echo "yum error: retry $iter in 10s" && \
       sleep 10; \
     done; \
@@ -74,8 +49,17 @@ RUN for iter in {1..10}; do \
 
 # Add an init process, check the checksum to make sure it's a match
 RUN set -e ; \
+    TINI_BIN="" ; \
+    case "$(arch)" in \
+        aarch64) \
+            TINI_BIN='tini-arm64' ; \
+            ;; \
+        x86_64) \
+            TINI_BIN='tini-amd64' ; \
+            ;; \
+        *) echo >&2 "Unsupported architecture $(arch)" ; exit 1 ;; \
+    esac ; \
   TINI_VERSION='v0.19.0' ; \
-  TINI_BIN='tini-arm64' ; \
   curl --retry 8 -S -L -O "https://github.com/krallin/tini/releases/download/${TINI_VERSION}/${TINI_BIN}" ; \
   curl --retry 8 -S -L -O "https://github.com/krallin/tini/releases/download/${TINI_VERSION}/${TINI_BIN}.sha256sum" ; \
   sha256sum -c "${TINI_BIN}.sha256sum" ; \
@@ -116,25 +100,25 @@ RUN groupadd --gid 1000 kibana && \
       --home-dir /usr/share/kibana --no-create-home \
       kibana
 
-LABEL org.label-schema.build-date="2021-02-08T22:42:18.324Z" \
+LABEL org.label-schema.build-date="2021-03-18T06:35:11.920Z" \
   org.label-schema.license="Elastic License" \
   org.label-schema.name="Kibana" \
   org.label-schema.schema-version="1.0" \
   org.label-schema.url="https://www.elastic.co/products/kibana" \
   org.label-schema.usage="https://www.elastic.co/guide/en/kibana/reference/index.html" \
-  org.label-schema.vcs-ref="3f71ce7177a41e067ddb1e670ec4ace5f6d4f5fe" \
+  org.label-schema.vcs-ref="b7f9a41f486a2910ef22a1274ec734219c35ca3e" \
   org.label-schema.vcs-url="https://github.com/elastic/kibana" \
   org.label-schema.vendor="Elastic" \
-  org.label-schema.version="7.11.0" \
-  org.opencontainers.image.created="2021-02-08T22:42:18.324Z" \
+  org.label-schema.version="7.12.0" \
+  org.opencontainers.image.created="2021-03-18T06:35:11.920Z" \
   org.opencontainers.image.documentation="https://www.elastic.co/guide/en/kibana/reference/index.html" \
   org.opencontainers.image.licenses="Elastic License" \
-  org.opencontainers.image.revision="3f71ce7177a41e067ddb1e670ec4ace5f6d4f5fe" \
+  org.opencontainers.image.revision="b7f9a41f486a2910ef22a1274ec734219c35ca3e" \
   org.opencontainers.image.source="https://github.com/elastic/kibana" \
   org.opencontainers.image.title="Kibana" \
   org.opencontainers.image.url="https://www.elastic.co/products/kibana" \
   org.opencontainers.image.vendor="Elastic" \
-  org.opencontainers.image.version="7.11.1"
+  org.opencontainers.image.version="7.12.0"
 
 
 USER kibana

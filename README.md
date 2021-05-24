@@ -1,3 +1,7 @@
+# NOTICE
+Elastic now support multi-architectures within their official Dockerfiles for Kibana. [These files can be found here](https://github.com/elastic/dockerfiles)
+At current Elastic haven’t added ARM to their Kibana image build pipeline despite the Dockerfiles supporting it. Until they add it to the official pipeline I will build the Kibana images for ARM and upload them to my Dockerhub registry. 
+
 # Kibana builds for ARM
 This repo will contain builds of Kibana for ARM. 
 
@@ -12,6 +16,7 @@ Since 7.11.0 the Node re2 module needs recompiling as the shipped version is com
 ## Docker Images
 Pre-built docker images can be found on my Dockerhub [here](https://hub.docker.com/r/jamesgarside/kibana/).
 
+- [Kibana 7.12.0](https://hub.docker.com/r/jamesgarside/kibana/tags)
 - [Kibana 7.11.2](https://hub.docker.com/r/jamesgarside/kibana/tags)
 - [Kibana 7.11.1](https://hub.docker.com/r/jamesgarside/kibana/tags)
 - [Kibana 7.11.0](https://hub.docker.com/r/jamesgarside/kibana/tags)
